@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MFTF — Music for the Future · Program Cycle</title>
+<title>VSI — Vital Sounds Initiative · Growth Model</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,22 +15,19 @@
   --bg3: #ffffff;
   --border: #e5e7eb; 
   --border2: #d1d5db;
-
+  
   /* Typography Colors */
   --muted: #6b7280; 
   --soft: #4b5563; 
   --body: #000000; 
   --head: #000000;
-
+  
   /* PMHU Coral/Pink Accent */
   --accent: #f05c5c; 
-
-  /* Seasonal Mappings */
-  --winter: var(--accent); --winter-bg: #fff5f5; --winter-lo: #fca5a5;
-  --spring: var(--accent); --spring-bg: #fff5f5; --spring-lo: #fca5a5;
-  --summer: var(--accent); --summer-bg: #fff5f5; --summer-lo: #fca5a5;
-  --fall: var(--accent);   --fall-bg: #fff5f5;   --fall-lo: #fca5a5;
-
+  
+  /* Tier accent (used for subtitle text, row chips, "now" column) */
+  --tier-bg: #fff5f5; --tier-lo: #fca5a5;
+  
   /* Status Badges */
   --live: #4ebad9; 
   --dev: #636363; 
@@ -68,16 +65,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--body);displ
 
 /* DIAGRAM CONTAINER & SVG */
 .diagram-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:2.5rem;overflow:hidden;}
-.cycle-svg{width:100%;max-width:540px;max-height:70vh;}
+.staircase-stage{display:flex;flex-direction:column;align-items:center;gap:.75rem;width:100%;max-width:540px;}
+.ov-link{align-self:center;background:none;border:1px solid var(--border2);border-radius:4px;padding:.32rem .8rem;font-family:'Inter',sans-serif;font-size:.66rem;font-weight:600;letter-spacing:.03em;color:var(--accent);cursor:pointer;transition:background .15s,color .15s,border-color .15s;}
+.ov-link:hover{background:var(--accent);color:#ffffff;border-color:var(--accent);}
+.ov-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.cycle-svg{width:100%;max-height:62vh;}
 
 /* SVG DIAGRAM INTERACTION STYLES */
-.sn, .hub { cursor:pointer; outline: none; }
+.sn { cursor:pointer; outline: none; }
 .node-bg { transition: stroke 0.2s, filter 0.2s; }
 .sn:hover .node-bg { filter: brightness(0.96); }
 .sn:focus .node-bg, .sn.active .node-bg { stroke: #9ca3af; stroke-width: 1.5px; filter: brightness(0.96); }
-.hub circle.hub-bg { transition: stroke 0.2s, fill 0.2s; }
-.hub:hover circle.hub-bg { fill: #f3f4f6; }
-.hub:focus circle.hub-bg, .hub.active circle.hub-bg { stroke: #9ca3af; stroke-width: 1.5px; }
 
 /* SCALE VIEW */
 .scale-wrap{flex:1;overflow:auto;padding:1.1rem 1.25rem;display:none;background:var(--bg);}
@@ -85,7 +83,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--body);displ
 .pathway{display:grid;grid-template-columns:80px repeat(4,1fr);gap:.4rem;align-items:start;}
 .sc-corner{background:var(--bg);position:sticky;top:0;z-index:3;}
 .sc-head{font-size:.62rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:.45rem .55rem;border-radius:4px;text-align:center;line-height:1.4;background:var(--bg2);color:var(--head);border:1px solid var(--border2);position:sticky;top:0;z-index:2;}
-.sc-now{border-color:var(--accent);color:var(--accent);background:var(--winter-bg);}
+.sc-now{border-color:var(--accent);color:var(--accent);background:var(--tier-bg);}
 .sr-label{font-size:.6rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding-top:.4rem;line-height:1.4;}
 .sr-cell{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:.5rem .55rem;font-size:.7rem;color:var(--soft);line-height:1.55;}
 .sr-cell ul{list-style:none;}
@@ -128,7 +126,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--body);displ
 /* Row grid (reused for weekly cadence + curriculum slots) */
 .wg{display:flex;flex-direction:column;gap:.45rem;margin-top:.65rem;}
 .wr{display:grid;grid-template-columns:60px 1fr;gap:.65rem;align-items:start;}
-.wn{font-size:.6rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);background:var(--spring-bg);border:1px solid var(--spring-lo);border-radius:4px;padding:.28rem .35rem;text-align:center;line-height:1.35;}
+.wn{font-size:.6rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);background:var(--tier-bg);border:1px solid var(--tier-lo);border-radius:4px;padding:.28rem .35rem;text-align:center;line-height:1.35;}
 .wd{font-size:.78rem;color:var(--body);line-height:1.6;padding-top:.18rem;}
 
 /* Tags */
@@ -213,13 +211,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--body);displ
 <body>
 
 <header class="hdr">
-  <div class="hdr-logo">Music for the Future <span>/ MFTF</span></div>
+  <div class="hdr-logo">Vital Sounds Initiative <span>/ VSI</span></div>
   <div class="hdr-div"></div>
-  <div class="hdr-eye">Program Cycle &amp; Scale Pathway · Working Draft · June 2026</div>
+  <div class="hdr-eye">Growth Model &amp; Scale Pathway · Working Draft · July 2026</div>
   <div class="hdr-badges">
     <div class="badge badge-live"><span class="bdot"></span>Live now</div>
     <div class="badge badge-dev"><span class="bdot"></span>In development</div>
-    <a href="https://sites.google.com/pmhu.org/pmhu-wiki/program-annual-planning-cycle/mftf-structure-strategy/" target="_blank" class="btn-wiki">Back to Wiki ↗&#xFE0E;</a>
+    <a href="https://sites.google.com/pmhu.org/pmhu-wiki/program-annual-planning-cycle/vsi-structure-strategy" target="_blank" class="btn-wiki">Back to Wiki ↗&#xFE0E;</a>
   </div>
 </header>
 
@@ -227,129 +225,118 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--body);displ
   <!-- LEFT -->
   <div class="left">
     <div class="view-toggle">
-      <button class="vt-btn active" id="vt-cycle" onclick="setView('cycle')">Annual Cycle</button>
+      <button class="vt-btn active" id="vt-cycle" onclick="setView('cycle')">Growth Model</button>
       <button class="vt-btn" id="vt-scale" onclick="setView('scale')">Scale Pathway</button>
     </div>
 
-    <!-- CYCLE SVG -->
+    <!-- STAIRCASE SVG -->
     <div class="diagram-wrap" id="view-cycle">
-      <svg class="cycle-svg" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MFTF annual program cycle diagram">
-        <defs>
-          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M2 1L8 5L2 9" fill="none" stroke="#d1d5db" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-        </defs>
+      <div class="staircase-stage">
+        <svg class="cycle-svg" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VSI growth staircase: four ascending stages from 8 facilities today to a 50-facility target by mid-2029, plus a branching Acceleration Path">
+          <defs>
+            <marker id="arrAccel" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="#f05c5c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
 
-        <!-- Guide ring -->
-        <circle cx="200" cy="210" r="148" fill="none" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="4 6"/>
+          <!-- Status legend -->
+          <line x1="18" y1="24" x2="26" y2="16" stroke="#4ebad9" stroke-width="2" stroke-linecap="round"/>
+          <text font-family="Inter,sans-serif" font-weight="600" font-size="8" fill="#6b7280" x="31" y="23">live</text>
+          <line x1="18" y1="40" x2="26" y2="32" stroke="#636363" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round"/>
+          <text font-family="Inter,sans-serif" font-weight="600" font-size="8" fill="#6b7280" x="31" y="39">in dev</text>
 
-        <!-- Status arc legend -->
-        <circle cx="22" cy="20" r="5" fill="none" stroke="#4ebad9" stroke-width="2"/>
-        <text font-family="Inter,sans-serif" font-weight="600" font-size="8" fill="#6b7280" x="31" y="23">live</text>
-        <circle cx="22" cy="36" r="5" fill="none" stroke="#636363" stroke-width="2" stroke-dasharray="3 3"/>
-        <text font-family="Inter,sans-serif" font-weight="600" font-size="8" fill="#6b7280" x="31" y="39">in dev</text>
+          <!-- Baseline -->
+          <line x1="30" y1="380" x2="370" y2="380" stroke="#d1d5db" stroke-width="1.5"/>
 
-        <!-- Flow arrows -->
-        <path d="M 158 340 Q 102 312 88 252" fill="none" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#arr)"/>
-        <path d="M 76 166 Q 100 104 158 74" fill="none" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#arr)"/>
-        <path d="M 244 60 Q 304 84 326 144" fill="none" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#arr)"/>
-        <path d="M 332 252 Q 310 314 260 344" fill="none" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#arr)"/>
+          <!-- ACCELERATION CONNECTOR (drawn first, sits behind the callout + bars) -->
+          <path d="M158 228 Q 166 138 180 76" fill="none" stroke="#f05c5c" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round" marker-end="url(#arrAccel)" opacity="0.9"/>
 
-        <!-- WINTER (bottom) -->
-        <circle cx="200" cy="358" r="58" fill="none" stroke="#636363" stroke-width="2" stroke-dasharray="4 4" opacity="0.6"/>
-        <g class="sn" id="sn-winter" onclick="showPanel('winter')" tabindex="0" role="button" aria-label="Winter: holiday tours">
-          <circle cx="200" cy="358" r="52" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.2" class="node-bg"/>
-          <text font-family="Oswald,sans-serif" font-size="14" font-weight="500" fill="#000000" x="200" y="353" text-anchor="middle">WINTER</text>
-          <text font-family="Inter,sans-serif" font-size="9" font-weight="500" fill="#f05c5c" x="200" y="369" text-anchor="middle">Holiday tours</text>
-        </g>
+          <!-- BAR 1 — NOW (8 facilities) -->
+          <g class="sn" id="sn-now" onclick="showPanel('now')" tabindex="0" role="button" aria-label="Now: 8 partner facilities, live">
+            <rect x="40" y="300" width="68" height="80" rx="5" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.2" class="node-bg"/>
+            <line x1="46" y1="314" x2="102" y2="314" stroke="#4ebad9" stroke-width="2.25" stroke-linecap="round"/>
+            <text font-family="Oswald,sans-serif" font-size="20" font-weight="500" fill="#000000" x="74" y="338" text-anchor="middle">8</text>
+            <text font-family="Inter,sans-serif" font-size="7" font-weight="500" fill="#f05c5c" x="74" y="350" text-anchor="middle">facilities</text>
+            <text font-family="Inter,sans-serif" font-size="7.5" font-weight="600" fill="#4ebad9" x="74" y="363" text-anchor="middle">NOW</text>
+          </g>
 
-        <!-- SPRING (left) -->
-        <circle cx="72" cy="210" r="58" fill="none" stroke="#636363" stroke-width="2" stroke-dasharray="4 4" opacity="0.6"/>
-        <g class="sn" id="sn-spring" onclick="showPanel('spring')" tabindex="0" role="button" aria-label="Spring: production and check-in tours">
-          <circle cx="72" cy="210" r="52" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.2" class="node-bg"/>
-          <text font-family="Oswald,sans-serif" font-size="14" font-weight="500" fill="#000000" x="72" y="200" text-anchor="middle">SPRING</text>
-          <text font-family="Inter,sans-serif" font-size="8.5" font-weight="500" fill="#f05c5c" x="72" y="215" text-anchor="middle">4-wk production</text>
-          <text font-family="Inter,sans-serif" font-size="8.5" font-weight="500" fill="#f05c5c" x="72" y="229" text-anchor="middle">+ check-in tours</text>
-        </g>
+          <!-- BAR 2 — NEAR-TERM CAPACITY (15 facilities) -->
+          <g class="sn" id="sn-near" onclick="showPanel('near')" tabindex="0" role="button" aria-label="Near-term: structural capacity for 15 facilities, in development">
+            <rect x="124" y="230" width="68" height="150" rx="5" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.2" class="node-bg"/>
+            <line x1="130" y1="244" x2="186" y2="244" stroke="#636363" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round"/>
+            <text font-family="Oswald,sans-serif" font-size="20" font-weight="500" fill="#000000" x="158" y="268" text-anchor="middle">15</text>
+            <text font-family="Inter,sans-serif" font-size="7" font-weight="500" fill="#f05c5c" x="158" y="280" text-anchor="middle">facilities</text>
+            <text font-family="Inter,sans-serif" font-size="7.5" font-weight="600" fill="#636363" x="158" y="293" text-anchor="middle">NEAR-TERM</text>
+          </g>
 
-        <!-- SUMMER (top) -->
-        <circle cx="200" cy="68" r="62" fill="none" stroke="#636363" stroke-width="2" stroke-dasharray="4 4" opacity="0.6"/>
-        <g class="sn" id="sn-summer" onclick="showPanel('summer')" tabindex="0" role="button" aria-label="Summer: premiere and workshops">
-          <circle cx="200" cy="68" r="56" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.2" class="node-bg"/>
-          <text font-family="Oswald,sans-serif" font-size="14" font-weight="500" fill="#000000" x="200" y="52" text-anchor="middle">SUMMER</text>
-          <text font-family="Inter,sans-serif" font-size="8.5" font-weight="500" fill="#f05c5c" x="200" y="68" text-anchor="middle">Lincoln Center premiere</text>
-          <text font-family="Inter,sans-serif" font-size="8.5" font-weight="500" fill="#f05c5c" x="200" y="83" text-anchor="middle">+ new workshops</text>
-          <text font-family="Inter,sans-serif" font-size="7.5" font-weight="600" fill="#4ebad9" x="200" y="97" text-anchor="middle">Creative writing: live</text>
-        </g>
+          <!-- BAR 3 — NEXT SEASON TARGET (25 facilities) -->
+          <g class="sn" id="sn-next" onclick="showPanel('next')" tabindex="0" role="button" aria-label="Next season: target of 25 facilities, in development">
+            <rect x="208" y="160" width="68" height="220" rx="5" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.2" class="node-bg"/>
+            <line x1="214" y1="174" x2="270" y2="174" stroke="#636363" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round"/>
+            <text font-family="Oswald,sans-serif" font-size="20" font-weight="500" fill="#000000" x="242" y="198" text-anchor="middle">25</text>
+            <text font-family="Inter,sans-serif" font-size="7" font-weight="500" fill="#f05c5c" x="242" y="210" text-anchor="middle">facilities</text>
+            <text font-family="Inter,sans-serif" font-size="7.5" font-weight="600" fill="#636363" x="242" y="223" text-anchor="middle">NEXT SEASON</text>
+          </g>
 
-        <!-- FALL (right) -->
-        <circle cx="328" cy="210" r="58" fill="none" stroke="#4ebad9" stroke-width="2" stroke-dasharray="20 40" stroke-dashoffset="0" opacity="0.8"/>
-        <circle cx="328" cy="210" r="58" fill="none" stroke="#636363" stroke-width="2" stroke-dasharray="20 40" stroke-dashoffset="-20" opacity="0.6"/>
-        <g class="sn" id="sn-fall" onclick="showPanel('fall')" tabindex="0" role="button" aria-label="Fall: residencies">
-          <circle cx="328" cy="210" r="52" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.2" class="node-bg"/>
-          <text font-family="Oswald,sans-serif" font-size="14" font-weight="500" fill="#000000" x="328" y="200" text-anchor="middle">FALL</text>
-          <text font-family="Inter,sans-serif" font-size="8.5" font-weight="500" fill="#f05c5c" x="328" y="215" text-anchor="middle">Residencies</text>
-          <text font-family="Inter,sans-serif" font-size="8.5" font-weight="500" fill="#f05c5c" x="328" y="229" text-anchor="middle">4 genre tracks</text>
-        </g>
+          <!-- BAR 4 — 3-YEAR TARGET (50 facilities by mid-2029) -->
+          <g class="sn" id="sn-target" onclick="showPanel('target')" tabindex="0" role="button" aria-label="3-year target: 50 facilities by mid-2029, in development">
+            <rect x="292" y="80" width="68" height="300" rx="5" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.2" class="node-bg"/>
+            <line x1="298" y1="94" x2="354" y2="94" stroke="#636363" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round"/>
+            <text font-family="Oswald,sans-serif" font-size="22" font-weight="500" fill="#000000" x="326" y="120" text-anchor="middle">50</text>
+            <text font-family="Inter,sans-serif" font-size="7" font-weight="500" fill="#f05c5c" x="326" y="132" text-anchor="middle">facilities</text>
+            <text font-family="Inter,sans-serif" font-size="7.5" font-weight="600" fill="#636363" x="326" y="145" text-anchor="middle">3-YEAR TARGET</text>
+          </g>
 
-        <!-- CENTER HUB -->
-        <g class="hub" onclick="showPanel('overview')" tabindex="0" role="button" aria-label="Overview">
-          <circle cx="200" cy="210" r="54" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5" class="hub-bg"/>
-          <text font-family="Inter,sans-serif" font-size="6.5" font-weight="600" letter-spacing="0.1em" fill="#6b7280" x="200" y="194" text-anchor="middle">PROJECT: MUSIC HEALS US</text>
-          <text font-family="Oswald,sans-serif" font-size="22" font-weight="500" fill="#000000" x="200" y="218" text-anchor="middle">MFTF</text>
-          <text font-family="Inter,sans-serif" font-size="7.5" font-weight="500" fill="#f05c5c" x="200" y="235" text-anchor="middle">tap for overview</text>
-        </g>
-      </svg>
+          <!-- ACCELERATION PATH — callout node (branches off the steady climb) -->
+          <g class="sn" id="sn-accel" onclick="showPanel('accel')" tabindex="0" role="button" aria-label="Acceleration Path: conditional fast-track scenario, in development">
+            <rect x="70" y="24" width="180" height="52" rx="8" fill="#ffffff" stroke="#f7b4ac" stroke-width="1.3" class="node-bg"/>
+            <path d="M84 44 L90 38 L96 44 M84 50 L90 44 L96 50" fill="none" stroke="#f05c5c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <text font-family="Oswald,sans-serif" font-size="10.5" font-weight="500" fill="#000000" x="166" y="42" text-anchor="middle">ACCELERATION PATH</text>
+            <text font-family="Inter,sans-serif" font-size="7.3" font-weight="500" fill="#f05c5c" x="166" y="55" text-anchor="middle">Healthcare network + Coordinator</text>
+            <text font-family="Inter,sans-serif" font-size="7" font-weight="600" fill="#636363" x="166" y="67" text-anchor="middle">Contingent</text>
+          </g>
+
+        </svg>
+        <button class="ov-link" onclick="showPanel('overview')">Program overview →</button>
+      </div>
     </div>
 
     <!-- SCALE PATHWAY VIEW -->
     <div class="scale-wrap" id="view-scale">
       <div class="pathway">
         <div class="sc-corner"></div>
-        <div class="sc-head sc-now">Now · Pilot</div>
-        <div class="sc-head">3 Years · Regional</div>
-        <div class="sc-head">5 Years · Multi-region</div>
-        <div class="sc-head">10 Years · National</div>
+        <div class="sc-head sc-now">Now · 8 Facilities</div>
+        <div class="sc-head">3 Years · 50 Facilities</div>
+        <div class="sc-head">5 Years · Scaling Up ✦</div>
+        <div class="sc-head">10 Years · Full Network ✦</div>
 
         <div class="sr-label">Reach</div>
-        <div class="sr-cell"><ul><li>12–16 facility partners</li><li>1–2 core geographies</li></ul></div>
-        <div class="sr-cell"><ul><li>24 facility partners</li><li>3 geographies, 8 each</li></ul></div>
-        <div class="sr-cell"><ul><li>32 facility partners</li><li>4 geographies, 8 each</li></ul></div>
-        <div class="sr-cell"><ul><li>50 facility partners</li><li>National footprint</li></ul></div>
+        <div class="sr-cell"><ul><li>8 partner facilities</li><li>Current roster</li></ul></div>
+        <div class="sr-cell"><ul><li>50 partner facilities</li><li>Target: mid-2029</li></ul></div>
+        <div class="sr-cell"><ul><li>75+ facilities (illustrative)</li><li>Beyond-50 scaling underway</li></ul></div>
+        <div class="sr-cell"><ul><li>150+ facilities (illustrative)</li><li>National footprint</li></ul></div>
 
-        <div class="sr-label">Annual cycle</div>
-        <div class="sr-cell"><ul><li>Holiday tour + celebration concerts</li><li>Spring check-in / touchpoint</li></ul></div>
-        <div class="sr-cell"><ul><li>Holiday tour per geography</li><li>Standardized check-in model</li><li>Year-round cadence</li></ul></div>
-        <div class="sr-cell"><ul><li>4-geography holiday tour</li><li>Repeat engagements deepen trust</li></ul></div>
-        <div class="sr-cell"><ul><li>Holiday + spring cycles nationwide</li><li>Flagship premiere moments</li><li>Drop-in/maintenance workshops</li></ul></div>
+        <div class="sr-label">Growth model</div>
+        <div class="sr-cell"><ul><li>One-at-a-time recruitment</li><li>High-touch relationship management</li></ul></div>
+        <div class="sr-cell"><ul><li>Same steady pace, sustained to 50</li><li>Acceleration Path on standby</li></ul></div>
+        <div class="sr-cell"><ul><li>Blended: steady pace + any triggered acceleration</li></ul></div>
+        <div class="sr-cell"><ul><li>Formalized recruitment beyond one-at-a-time</li><li>Per "comprehensive scaling" trigger</li></ul></div>
 
-        <div class="sr-label">Program mix</div>
-        <div class="sr-cell"><ul><li>Classical ✓ live</li><li>Creative writing ✓ live</li><li>Songwriting: emerging</li><li>Jazz: build by yr 3</li></ul></div>
-        <div class="sr-cell"><ul><li>Jazz + songwriting operational</li><li>Begin piloting Musical Theatre</li><li>Min. 4 venues per category</li></ul></div>
-        <div class="sr-cell"><ul><li>Multiple categories reliably</li><li>Clear pathways by facility fit</li><li>Larger touring roster</li></ul></div>
-        <div class="sr-cell"><ul><li>Full portfolio at maturity</li><li>10 courses/category/year</li><li>Short residencies + accreditation</li></ul></div>
+        <div class="sr-label">Staffing &amp; support</div>
+        <div class="sr-cell"><ul><li>Leadership manages relationships directly</li><li>No dedicated ops role yet</li></ul></div>
+        <div class="sr-cell"><ul><li>15: existing capacity, no new hires</li><li>25: "manageable adjustments" (TBD)</li><li>Dedicated Programming Coordinator on standby</li></ul></div>
+        <div class="sr-cell"><ul><li>Programming Coordinator likely permanent by now</li></ul></div>
+        <div class="sr-cell"><ul><li>Comprehensive operational support structure</li><li>Possibly a small ops team, not one role</li></ul></div>
 
-        <div class="sr-label">Building</div>
-        <div class="sr-cell"><ul><li>Replicable program units</li><li>Clear partner expectations</li></ul></div>
-        <div class="sr-cell"><ul><li>Artist pipeline: recruit → audition → train</li><li>Curriculum scaling system</li></ul></div>
-        <div class="sr-cell"><ul><li>Regional delivery capacity</li><li>Retention systems</li></ul></div>
-        <div class="sr-cell"><ul><li>National delivery engine</li><li>Evidence + storytelling system</li></ul></div>
-
-        <div class="sr-label">Cost drivers</div>
-        <div class="sr-cell" style="color:var(--muted);font-size:.7rem;">Artists, Travel, Staff time, Curriculum</div>
-        <div class="sr-cell" style="color:var(--muted);font-size:.7rem;">Training, Recruitment, Logistics, Evaluation</div>
-        <div class="sr-cell" style="color:var(--muted);font-size:.7rem;">Multi-region touring, Expanded roster, Partner support</div>
-        <div class="sr-cell" style="color:var(--muted);font-size:.7rem;">National operations, Curriculum portfolio, Measurement + media</div>
-
-        <div class="sr-label">Locations</div>
-        <div class="sr-cell"><ul><li>CA (Chowchilla, Bay Area)</li><li>CT, NV expanding</li></ul></div>
-        <div class="sr-cell"><ul><li>NY (10 venues)</li><li>CT (10 venues)</li><li>CA (10+ venues)</li></ul></div>
-        <div class="sr-cell"><ul><li>Pacific: CA, NV (10)</li><li>Mountain: UT, CO (10)</li><li>Central: Chicago (10)</li><li>East/Atlantic: NY, CT</li></ul></div>
-        <div class="sr-cell"><ul><li>50 venues, 4 geographies</li><li>10 venues/holiday tour</li><li>Same musicians return each year</li></ul></div>
+        <div class="sr-label">Stage trigger</div>
+        <div class="sr-cell" style="color:var(--muted);font-size:.7rem;">Baseline — current state</div>
+        <div class="sr-cell" style="color:var(--muted);font-size:.7rem;">Sustained 3-yr recruitment; OR a funded high-volume healthcare network partner (early trigger)</div>
+        <div class="sr-cell" style="color:var(--muted);font-size:.7rem;">Continued momentum past 50 + first "comprehensive scaling" investments</div>
+        <div class="sr-cell" style="color:var(--muted);font-size:.7rem;">Sustained growth under the scaled operational structure</div>
       </div>
     </div>
 
-    <div class="dfn">Source: Planning sketch (Dana &amp; Molly) + Subscription Model Brainstorm + Scale Pathway PDF · <span style="color:var(--dev)">✦</span> = open question for team</div>
+    <div class="dfn">Source: single growth-strategy paragraph (program leadership) · <span style="color:var(--dev)">✦</span> = open question or extrapolation beyond the source material · 5- and 10-year figures are illustrative, not stated targets · Staircase reads left to right: today's 8 facilities → near-term capacity (15) → next-season target (25) → 3-year target (50 by mid-2029) — with an Acceleration Path that can bypass the steady pace entirely.</div>
   </div>
 
   <!-- RIGHT: PANELS -->
@@ -359,258 +346,196 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--body);displ
       <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
       </svg>
-      <p>Select a season from the cycle diagram, or switch to Scale Pathway for the full growth plan.</p>
+      <p>Select a stage from the growth staircase, or switch to Scale Pathway for the full plan.</p>
     </div>
 
     <!-- OVERVIEW -->
     <div class="sp" id="panel-overview">
       <div class="ph">
         <div class="ph-top">
-          <div><div class="ph-s">Program Overview</div><div class="ph-title">Music for the Future</div><div class="ph-time">Justice settings · Annual cycle · Building toward national scale</div></div>
+          <div><div class="ph-s">Program Overview</div><div class="ph-title">Vital Sounds Initiative</div><div class="ph-time">Facility partnerships · Staged growth model · Scaling toward 50 by mid-2029</div></div>
           <button class="cb-btn" onclick="closePanel()">close ×</button>
         </div>
         <div class="st-row">
-          <div class="sp-pill sp-live"><span class="sp-dot"></span>Classical</div>
-          <div class="sp-pill sp-live"><span class="sp-dot"></span>Creative Writing</div>
-          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Songwriting (emerging)</div>
-          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Jazz (priority)</div>
-          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Musical Theatre (not yet)</div>
+          <div class="sp-pill sp-live"><span class="sp-dot"></span>8 facilities — live</div>
+          <div class="sp-pill sp-dev"><span class="sp-dot"></span>15-facility capacity — ready</div>
+          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Acceleration Path — contingent</div>
         </div>
       </div>
       <div class="pb">
         <div class="cb">
-          <div class="cbl">What this is</div>
-          <div class="cbb">A year-round creative music program for incarcerated individuals. Participants move through a seasonal arc — holiday tours build relationships, fall residencies deliver coursework, spring produces a full musical theatre work, and summer culminates in a premiere livestreamed from Lincoln Center to all partner facilities.</div>
+          <div class="cbl">What this page shows</div>
+          <div class="cbb">VSI is positioned for strategic, sustainable expansion — scaling from its current roster of 8 facilities to 50 partner facilities within three years (by mid-2029). This page is built from a single growth-strategy paragraph, so it's intentionally focused on the growth and staffing story rather than program content — what VSI actually delivers at each facility isn't detailed in the source material yet.</div>
         </div>
         <div class="cb">
-          <div class="cbl">Current program structure</div>
+          <div class="cbl">The shape of the plan</div>
           <div class="cbb"><ul>
-            <li>7-week program: 5-day in-person residency + 6-week remote course</li>
-            <li>Taught by San Francisco Conservatory of Music (SFCM) faculty</li>
-            <li>Certificates of Completion from PMHU &amp; SFCM</li>
-            <li>2,400+ participants to date</li>
-            <li>Primary partner: Five Keys (CA) · Expanding: CT, NV</li>
+            <li>Now: 8 facilities, the current live roster</li>
+            <li>Near-term: structural capacity for 15, no new investment needed</li>
+            <li>Next season: 25, with "manageable adjustments" to program support</li>
+            <li>3-year target: 50 by mid-2029, via steady one-at-a-time recruitment</li>
+            <li>Acceleration Path: a contingent fast-track if a high-volume funded partner appears</li>
           </ul></div>
         </div>
         <div class="cb">
-          <div class="cbl">Core program team</div>
-          <div class="cbb"><ul>
-            <li>Dana — artistic lead, co-writes the musical, leads acting instruction</li>
-            <li>Michael Shoff — co-writer, present through full 4-week production</li>
-            <li>SFCM faculty — remote course instruction</li>
-            <li>Musician teams + TAs embedded per genre track</li>
-          </ul></div>
+          <div class="cbl">Why the pace is deliberate</div>
+          <div class="cbb">The "one-at-a-time" model exists specifically to let leadership maintain high-touch relationship management with every facility as the roster grows — speed is being deliberately traded for relationship quality, right up until the Acceleration Path changes the math.</div>
         </div>
         <div class="vs">
-          <div class="cbl">10-year targets</div>
+          <div class="cbl">Growth model, at a glance</div>
           <div class="vg">
-            <div class="vstat"><strong>50</strong><span>facility partners</span></div>
-            <div class="vstat"><strong>4</strong><span>geographies</span></div>
-            <div class="vstat"><strong>10</strong><span>courses per category / yr</span></div>
-            <div class="vstat"><strong>4</strong><span>full accredited course tracks</span></div>
+            <div class="vstat"><strong>8</strong><span>facilities today</span></div>
+            <div class="vstat"><strong>50</strong><span>facility target, mid-2029</span></div>
+            <div class="vstat"><strong>15</strong><span>facilities at current capacity</span></div>
+            <div class="vstat"><strong>20</strong><span>sessions/wk — accel. trigger example</span></div>
           </div>
         </div>
         <div class="tbd">
-          <div class="tbd-l">✦ Open questions for Dana &amp; Molly</div>
-          <div class="tbd-b">Is the 9-week accredited course format confirmed or still being secured for any track? What is the target cohort size per geography per year? How does the artist pipeline (recruit → audition → train) currently work and who owns it?</div>
+          <div class="tbd-l">✦ Open questions for the team</div>
+          <div class="tbd-b">What does VSI actually deliver at each facility — what's the program content? What facility types make up the current 8 (and the target 50)? Are there specific locations or regions in the plan? What does "manageable adjustments to program support" concretely mean at the 25-facility stage?</div>
         </div>
       </div>
     </div>
 
-    <!-- WINTER -->
-    <div class="sp" id="panel-winter">
+    <!-- NOW -->
+    <div class="sp" id="panel-now">
       <div class="ph">
         <div class="ph-top">
-          <div><div class="ph-s">Winter</div><div class="ph-title">Holiday Tours</div><div class="ph-time">December – February · 5–7 day tours per geography</div></div>
+          <div><div class="ph-s">Now</div><div class="ph-title">8 Partner Facilities</div><div class="ph-time">Current roster · Live</div></div>
           <button class="cb-btn" onclick="closePanel()">close ×</button>
         </div>
         <div class="st-row">
-          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Not yet at scale — in development</div>
+          <div class="sp-pill sp-live"><span class="sp-dot"></span>Active roster — live</div>
         </div>
       </div>
       <div class="pb">
         <div class="cb">
-          <div class="cbl">What happens</div>
-          <div class="cbb"><ul>
-            <li>Holiday tours to partner facilities, organized by genre track</li>
-            <li>Creative writing, jazz, classical, and songwriting each tour separately</li>
-            <li>Same musicians return to the same locations each year (relationship continuity)</li>
-            <li>5–7 day tour per geography at full scale</li>
-            <li>Dana + Michael write the musical for the upcoming Spring production during this period</li>
-          </ul></div>
+          <div class="cbl">Where things stand</div>
+          <div class="cbb">VSI currently partners with 8 facilities. This is the live, current state of the program — the base every stage of the growth plan builds from.</div>
         </div>
         <div class="cb">
-          <div class="cbl">Scale target (10-year)</div>
-          <div class="cbb"><ul>
-            <li>4 geographic tours running simultaneously</li>
-            <li>10 venues per tour (40 total holiday touchpoints)</li>
-            <li>Each geography runs its own tour cadence</li>
-          </ul></div>
-          <div class="gg" style="margin-top:.65rem;">
-            <div class="gc"><div class="gc-r">Pacific</div><div class="gc-v">CA + NV · <strong>10 venues</strong></div></div>
-            <div class="gc"><div class="gc-r">Mountain</div><div class="gc-v">UT + CO · <strong>10 venues</strong></div></div>
-            <div class="gc"><div class="gc-r">Central</div><div class="gc-v">Chicago · <strong>10 venues</strong></div></div>
-            <div class="gc"><div class="gc-r">East / Atlantic</div><div class="gc-v">NY + CT · <strong>10 venues</strong></div></div>
-          </div>
+          <div class="cbl">What's already true</div>
+          <div class="cbb">The program already has the structural capacity to expand to 15 total facilities without any additional investment — that's the very next stage, not a future one (see Near-Term Capacity).</div>
         </div>
         <div class="tbd">
           <div class="tbd-l">✦ Open questions</div>
-          <div class="tbd-b">How many facilities currently receive holiday tours? What is the exact format — performances, workshops, or both? Is the musical writing happening concurrently with tours or on a separate timeline? When does the completed musical need to be ready before Spring Week 1 begins?</div>
+          <div class="tbd-b">What is the current facility mix — one type or several? What does day-to-day delivery look like across these 8 facilities today? Who currently manages relationships and delivery across all 8?</div>
         </div>
       </div>
     </div>
 
-    <!-- SPRING -->
-    <div class="sp" id="panel-spring">
+    <!-- NEAR-TERM -->
+    <div class="sp" id="panel-near">
       <div class="ph">
         <div class="ph-top">
-          <div><div class="ph-s">Spring</div><div class="ph-title">Production &amp; Check-in Tours</div><div class="ph-time">February – April · One 4-week production + one-day check-in visits</div></div>
+          <div><div class="ph-s">Near-Term</div><div class="ph-title">15 Total Facilities</div><div class="ph-time">Immediate structural capacity · Adding 5–7 locations</div></div>
           <button class="cb-btn" onclick="closePanel()">close ×</button>
         </div>
         <div class="st-row">
-          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Musical Theatre — not yet</div>
-          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Check-in tours — not yet</div>
+          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Structurally ready — pending recruitment</div>
         </div>
       </div>
       <div class="pb">
         <div class="cb">
-          <div class="cbl">February — Pre-production</div>
-          <div class="cbb">Dana + Michael complete the musical. The production is co-written — they bring a framework, and Week 1 of the in-person residency finishes the writing together with students.</div>
+          <div class="cbl">What this stage is</div>
+          <div class="cbb">In the immediate term, the program possesses the structural capacity to expand to 15 total facilities — adding 5 to 7 new locations on top of the current 8. This is available capacity, not yet realized headcount.</div>
         </div>
         <div class="cb">
-          <div class="cbl">March — 4-week Musical Theatre production</div>
-          <div class="cbb">One facility selected per year. Special category — only one prison per cycle, selected annually. Michael + Dana are present the entire four weeks.</div>
-          <div class="wg">
-            <div class="wr"><div class="wn">Week 1</div><div class="wd">Finish writing the production with students — collaborative completion of the musical</div></div>
-            <div class="wr"><div class="wn">Week 2</div><div class="wd">Students begin acting lessons with Dana</div></div>
-            <div class="wr"><div class="wn">Week 3</div><div class="wd">Full production — set, costumes, lighting</div></div>
-            <div class="wr"><div class="wn">Week 4</div><div class="wd">Bring in musicians. Rehearse all week live together. Celebration performance on the final day.</div></div>
-          </div>
-        </div>
-        <div class="cb">
-          <div class="cbl">March / April — Check-in tours</div>
-          <div class="cbb"><ul>
-            <li>One-day visits to other partner facilities — similar format to holiday tours</li>
-            <li>Workshops + preview clips of Musical Theatre production in progress</li>
-            <li>Potentially over Zoom for more distant facilities</li>
-          </ul></div>
+          <div class="cbl">What it will take</div>
+          <div class="cbb">Recruiting 5–7 new facility partners into the existing one-at-a-time model. No structural changes are needed — this stage is purely about outreach and relationship-building at the current pace.</div>
         </div>
         <div class="tbd">
           <div class="tbd-l">✦ Open questions</div>
-          <div class="tbd-b">What is the selection criteria for the production facility — does it rotate or is Chowchilla the default? Who handles logistics vs. artistic direction during the 4-week block? How many check-in tours are realistic per spring cycle currently? Does "preview clips" mean recorded material or live excerpts?</div>
+          <div class="tbd-b">What's the actual timeline for reaching 15? Who is running facility recruitment day-to-day? Is there a target list of prospective facilities yet?</div>
         </div>
       </div>
     </div>
 
-    <!-- SUMMER -->
-    <div class="sp" id="panel-summer">
+    <!-- NEXT SEASON -->
+    <div class="sp" id="panel-next">
       <div class="ph">
         <div class="ph-top">
-          <div><div class="ph-s">Summer</div><div class="ph-title">Premiere, Clips Tours &amp; New Workshops</div><div class="ph-time">May – August · Lincoln Center livestream capstone</div></div>
+          <div><div class="ph-s">Next Season</div><div class="ph-title">25 Facilities</div><div class="ph-time">With manageable adjustments to program support</div></div>
           <button class="cb-btn" onclick="closePanel()">close ×</button>
         </div>
         <div class="st-row">
-          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Theatre clips tours — not yet</div>
-          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Lincoln Center premiere — aspirational</div>
-          <div class="sp-pill sp-live"><span class="sp-dot"></span>Creative writing workshops — live</div>
+          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Needs manageable support adjustments</div>
         </div>
       </div>
       <div class="pb">
         <div class="cb">
-          <div class="cbl">May / June — Musical selections / clips tours</div>
-          <div class="cbb"><ul>
-            <li>Excerpts from the Spring production travel to other partner facilities</li>
-            <li>Participants at non-production facilities experience the work</li>
-            <li>Not yet running — in development</li>
-          </ul></div>
+          <div class="cbl">What this stage is</div>
+          <div class="cbb">By next season, with manageable adjustments to program support, the initiative targets reaching 25 facilities. This is the point where the current lean support model needs light reinforcement — not a full staffing overhaul, but enough of a change to support roughly triple the original roster.</div>
         </div>
         <div class="cb">
-          <div class="cbl">Summer capstone — Lincoln Center Premiere &amp; Livestream</div>
-          <div class="cbb"><ul>
-            <li>Actors from the Spring Musical Theatre production perform at Lincoln Center Theater</li>
-            <li>Their writing is produced by Lincoln Center — annual event</li>
-            <li>Livestreamed to all 50 partner venues across the US</li>
-            <li>The shared goal all participants across all facilities are working toward</li>
-            <li>All facilities see their participants' work in real time</li>
-          </ul></div>
-        </div>
-        <div class="cb">
-          <div class="cbl">July / August — New prompt workshops</div>
-          <div class="cbb"><ul>
-            <li>New creative writing + poetry workshops begin — seeding the next cycle</li>
-            <li>"Music Moves Us" curriculum: writing poetry/rap from key source material</li>
-            <li>1 musician improvising per session</li>
-            <li>Material feeds directly into Fall Jazz and Classical courses</li>
-            <li>10 total creative writing sessions at full scale</li>
-          </ul></div>
-        </div>
-        <div class="tags">
-          <span class="tag tag-live">Creative writing: live</span>
-          <span class="tag tag-dev">Lincoln Center: in dev</span>
-          <span class="tag tag-dev">Clips tours: in dev</span>
+          <div class="cbl">What "manageable adjustments" might mean</div>
+          <div class="cbb">The source material doesn't spell this out — it could be added part-time support, updated tools or processes, or reallocating existing staff time. Worth defining concretely before this stage begins.</div>
         </div>
         <div class="tbd">
           <div class="tbd-l">✦ Open questions</div>
-          <div class="tbd-b">Is the Lincoln Center partnership confirmed or is this the target venue? Is it Lincoln Center Theater specifically or another space in that network? Who attends the premiere — families, funders, facility staff, public? How does summer creative writing material connect mechanically to Fall Jazz/Classical courses?</div>
+          <div class="tbd-b">What specific "manageable adjustments" are being planned? Does this require any budget increase, or is it absorbed within current operations? What defines "next season" — is there a target date?</div>
         </div>
       </div>
     </div>
 
-    <!-- FALL -->
-    <div class="sp" id="panel-fall">
+    <!-- 3-YEAR TARGET -->
+    <div class="sp" id="panel-target">
       <div class="ph">
         <div class="ph-top">
-          <div><div class="ph-s">Fall</div><div class="ph-title">Residencies</div><div class="ph-time">September – November · 4 genre tracks · Celebration concerts in November</div></div>
+          <div><div class="ph-s">3-Year Target</div><div class="ph-title">50 Partner Facilities</div><div class="ph-time">By mid-2029 · Steady, one-at-a-time growth</div></div>
           <button class="cb-btn" onclick="closePanel()">close ×</button>
         </div>
         <div class="st-row">
-          <div class="sp-pill sp-live"><span class="sp-dot"></span>Classical</div>
-          <div class="sp-pill sp-live"><span class="sp-dot"></span>Creative Writing</div>
-          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Songwriting (almost)</div>
-          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Jazz — priority: get moving</div>
+          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Target — steady growth model</div>
         </div>
       </div>
       <div class="pb">
         <div class="cb">
-          <div class="cbl">Course structure — 10-year model</div>
-          <div class="cbb">Each genre track runs two formats simultaneously. All tracks start in September. Celebration concerts in November for all.</div>
-          <div class="cg">
-            <div class="cc">
-              <div class="cc-name"><span class="ldot"></span>Classical</div>
-              <div class="cc-stat"><em>4/10</em> full 9-week accredited<br><em>6/10</em> 1-week intensive<br>Start September</div>
-            </div>
-            <div class="cc">
-              <div class="cc-name"><span class="ldot"></span>Creative Writing</div>
-              <div class="cc-stat"><em>4/10</em> full 9-week accredited<br><em>6/10</em> 1-week intensive<br>"Music Moves Us" curriculum</div>
-            </div>
-            <div class="cc">
-              <div class="cc-name"><span class="ddot"></span>Songwriting</div>
-              <div class="cc-stat"><em>4/10</em> full 9-week accredited<br><em>6/10</em> 1-week intensive<br>Full course not yet secured</div>
-            </div>
-            <div class="cc">
-              <div class="cc-name"><span class="ddot"></span>Jazz</div>
-              <div class="cc-stat"><em>4/10</em> full 9-week accredited<br><em>6/10</em> 1-week intensive<br><span style="color:var(--accent);font-weight:600;">No jazz yet — priority build</span></div>
-            </div>
-          </div>
+          <div class="cbl">The growth model</div>
+          <div class="cbb">Getting from 25 to 50 facilities follows the same "one-at-a-time" recruitment approach used from day one — deliberately paced, not rushed, so leadership can maintain high-touch relationship management with every facility partner as the roster grows.</div>
         </div>
         <div class="cb">
-          <div class="cbl">Staffing model</div>
-          <div class="cbb"><ul>
-            <li>Full musician teams embedded per genre track</li>
-            <li>TAs embedded in each track</li>
-            <li>Modified workbooks for varying knowledge levels</li>
-            <li>Level-selection quiz — aspirational, to be built</li>
-            <li>Michael Shoff: 9-week course lead (scope to confirm)</li>
-            <li>Dana: auditions role during fall (scope to confirm)</li>
-          </ul></div>
+          <div class="cbl">Why the pace is deliberate</div>
+          <div class="cbb">The steady model exists specifically to protect the high-touch relationship management central to how VSI operates today. Scaling faster would mean trading that away — unless the Acceleration Path gets triggered instead.</div>
         </div>
         <div class="cb">
-          <div class="cbl">Key design tension (from planning docs)</div>
-          <div class="cbb">"Better to have 10 venues? Or to be in touch for 9 weeks?" — this is a core question to work through with Michael Shoff. It's the fundamental reach vs. depth tradeoff for the program.</div>
+          <div class="cbl">Beyond 50</div>
+          <div class="cbb">Expansion past the 50-facility mark triggers a planned, comprehensive scaling of VSI's broader operational support structure — meaning the organization itself, not just the facility count, would need to grow up a level. What that comprehensive scaling concretely includes isn't detailed in the source material yet.</div>
         </div>
         <div class="tbd">
           <div class="tbd-l">✦ Open questions</div>
-          <div class="tbd-b">Is the 9-week accredited format secured for any track yet? What does Dana's auditions role in Fall entail — selecting participants, musicians, or both? Do Fall cohort participants flow into the Spring Musical Theatre production, or are those separate pools? Who is building the level-selection quiz and on what timeline?</div>
+          <div class="tbd-b">What does "comprehensive scaling of the operational support structure" concretely mean — new roles, new systems, both? Is there a rough sense of what triggers it besides crossing 50, or is it purely the facility count?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCELERATION PATH -->
+    <div class="sp" id="panel-accel">
+      <div class="ph">
+        <div class="ph-top">
+          <div><div class="ph-s">Acceleration Path</div><div class="ph-title">The Fast-Track Scenario</div><div class="ph-time">Conditional · Triggered by a high-volume funded partner</div></div>
+          <button class="cb-btn" onclick="closePanel()">close ×</button>
+        </div>
+        <div class="st-row">
+          <div class="sp-pill sp-dev"><span class="sp-dot"></span>Contingent — not yet triggered</div>
+        </div>
+      </div>
+      <div class="pb">
+        <div class="cb">
+          <div class="cbl">The trigger</div>
+          <div class="cbb">If a healthcare facility network onboards with full funding for high-volume delivery — the source material's example is 20 sessions per week — the standard one-at-a-time pace no longer fits. VSI is structured to pivot quickly when this happens.</div>
+        </div>
+        <div class="cb">
+          <div class="cbl">The pivot: a Dedicated Programming Coordinator</div>
+          <div class="cbb">The plan is to bring on a Dedicated Programming Coordinator to manage day-to-day operations. That frees executive leadership to focus on strategy and partner development instead of getting pulled into daily delivery logistics.</div>
+        </div>
+        <div class="cb">
+          <div class="cbl">Why this matters</div>
+          <div class="cbb">This is the one scenario in the plan where growth pace decouples from the "one-at-a-time" model — a single well-funded, high-volume partner could move faster than years of steady recruitment.</div>
+        </div>
+        <div class="tbd">
+          <div class="tbd-l">✦ Open questions</div>
+          <div class="tbd-b">Is there an active conversation with a healthcare network right now, or is this purely a contingency? What's the hiring plan or budget for the Dedicated Programming Coordinator role if this triggers? Would one Coordinator scale to multiple high-volume partners, or would each need its own?</div>
         </div>
       </div>
     </div>
